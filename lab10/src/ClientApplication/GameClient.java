@@ -9,7 +9,7 @@ import java.net.Socket;
 public class GameClient {
     public static void main(String[] args) throws IOException {
         String serverAddress = "127.0.0.1"; // The server's IP address
-        int PORT = 8100; // The server's port
+        int PORT = 8800; // The server's port
         try {
             Socket socket = new Socket(serverAddress, PORT);
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
@@ -21,6 +21,9 @@ public class GameClient {
                 out.println(request);
                 String response = in.readLine();
                 System.out.println(response);
+                if (request == "exit") {
+                    break;
+                }
             }
         }catch (IOException e) {
                 System.out.println(e);

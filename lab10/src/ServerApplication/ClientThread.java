@@ -18,10 +18,19 @@ public class ClientThread extends Thread {
             String request = in.readLine();
             PrintWriter out = new PrintWriter(socket.getOutputStream());
             String raspuns = "Your request is: " + request + "!";
-            out.println(raspuns);
-            out.flush();
             if (request.equals("exit")) {
                 socket.close();
+            }
+            else if (request.equals("stop")) {
+                raspuns = "Server stopped";
+                out.println(raspuns);
+                out.flush();
+                socket.close();
+                System.exit(0);
+            }
+            else {
+                out.println(raspuns);
+                out.flush();
             }
         } catch (IOException e) {
             System.out.println("Comunication error... " + e);
